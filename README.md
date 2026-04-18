@@ -1,10 +1,11 @@
 # Terrap, by Sirrend
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  ![GitHub go.mod Go version (subdirectory of monorepo)](https://img.shields.io/github/go-mod/go-version/sirrend/terrap-cli?filename=go.mod)</br>
 <img src="./docs/terrap-cover.png"/>
-</br></br>
-Simplify your Provider version upgrades with **Terrap** - a powerful CLI tool that scans your system and identifies any required changes. </br>
-The tool offers clear and actionable notifications, helping you streamline the upgrade process and avoid any potential errors or complications.</br></br>
+ your Provider version upgrades with ** that scans your system and identifies any</br>
+The tool offers clear and the upgrade process and avoid any potential errors or complications.</br></br>
 🔍 **Terrap is an alpha version project, therefore some data might be partial.**
+
+> **Personal note:** I'm using this tool to manage provider upgrades across several AWS-heavy workspaces. Works well paired with `terraform-docs`.
 
 ## Resources
 * Documentation - <a href="https://www.sirrend.com/terrap-docs">sirrend.com/terrap-docs</a>
@@ -71,24 +72,4 @@ Looking for a specific resource type changes? Use the `--data-sources` `--resour
 
 ### Stay up-to-date with `whats-new`
 Ready to explore what's new in the following version of your provider? Simply execute `terrap whats-new`.</br>
-Looking to delve into a specific version of your provider? Specify the desired version with `--fixed-providers <provider>:<version>` to explore what's new and improved.
-
-### Which Providers are Supported?
-Run `terrap providers get-supported` to get a list of all supported providers and version ranges.</br>
-You can use the `--filter` flag if you're looking for something specific.
-
-
-## What's the Future Hold 🔮
-1. Bulk updates - straight to a version of your choosing.
-2. Automatic Upgrades - you write, **Terrap** upgrades.
-3. Expanding Terrap's providers support.
-
-## Something's Wrong? Tell Us! 🚨
-You can open an issue either directly from the CLI using `terrap open-issue` or through the GitHub UI.
-
-## Want to contribute? 🍀 Lucky us!
-1. Checkout from the `main` branch.
-2. Add your code with the proper documentation.
-3. Open a PR with a detailed explanation of the functionality you want to add.
-
-
+Looking to delve into a specific version of your
