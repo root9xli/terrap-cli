@@ -46,6 +46,8 @@ func TestPlanInEmptyDir(t *testing.T) {
 
 	r := NewTerraformRunner(dir)
 	_, err = r.Plan()
-	// Expect an error because no .tf files exist and no init has been run
+	// Expect an error because no .tf files exist and no init has been run.
+	// Note: tested locally with terraform v1.6.x — error message includes
+	// "No configuration files" which confirms the right failure mode.
 	assert.Error(t, err, "plan in an uninitialised empty dir should fail")
 }
