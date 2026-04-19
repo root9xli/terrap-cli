@@ -49,5 +49,6 @@ func TestPlanInEmptyDir(t *testing.T) {
 	// Expect an error because no .tf files exist and no init has been run.
 	// Note: tested locally with terraform v1.6.x — error message includes
 	// "No configuration files" which confirms the right failure mode.
+	// Also reproduces with OpenTofu v1.6.x with the same error message.
 	assert.Error(t, err, "plan in an uninitialised empty dir should fail")
 }
