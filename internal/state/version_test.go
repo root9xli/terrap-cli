@@ -31,6 +31,7 @@ func TestLoadVersionRecordMissingReturnsEmpty(t *testing.T) {
 	dir := t.TempDir()
 	record, err := LoadVersionRecord(dir)
 	require.NoError(t, err)
+	// A missing version file should yield an empty (not nil) Versions map
 	assert.Empty(t, record.Versions)
 }
 
@@ -49,6 +50,7 @@ func TestDeleteVersionRecord(t *testing.T) {
 }
 
 func TestDeleteVersionRecordMissingIsNoop(t *testing.T) {
+	// Deleting a non-existent record should be a no-op, not an error
 	dir := t.TempDir()
 	err := DeleteVersionRecord(dir)
 	assert.NoError(t, err)
