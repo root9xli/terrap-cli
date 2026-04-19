@@ -17,12 +17,7 @@ type ModuleVersion struct {
 // GetModuleVersions runs `terraform version -json` style parsing to extract
 // module sources from the lock file output produced by the runner.
 func GetModuleVersions(r runner.Runner) (map[string]ModuleVersion, error) {
-	out, err := r.Run("providers", "lock", "-help")
-	_ = out
-	if err != nil {
-		// fallback: use version output
-	}
-
+	// Note: the providers lock -help call doesn't seem useful here; skipping it
 	raw, err := r.Run("version")
 	if err != nil {
 		return nil, fmt.Errorf("get module versions: %w", err)
@@ -49,6 +44,7 @@ func parseModuleOutput(output string) map[string]ModuleVersion {
 }
 
 // CheckModuleDrift compares current module versions against the saved record.
+// Drifted modules are reported as "name: oldVersion -> newVersion".
 func CheckModuleDrift(r runner.Runner, stateDir string) ([]string, error) {
 	current, err := GetModuleVersions(r)
 	if err != nil {
