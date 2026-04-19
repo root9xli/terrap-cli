@@ -55,7 +55,7 @@ func deleteInitData(dir string) {
 		_ = os.Remove(path.Join(dir, ".terraform.lock.hcl"))
 		_ = os.RemoveAll(path.Join(dir, ".terraform"))
 
-		_, _ = commons.GREEN.Println("\nWorkspace removed.")
+		_, _ = commons.GREEN.Println("\nWorkspace removed successfully. You can re-initialize with `terrap init`.")
 
 	} else {
 		_, _ = commons.YELLOW.Println("The given directory is not initialized.")
