@@ -21,11 +21,12 @@ func VersionFilePath(dir string) string {
 }
 
 // SaveVersionRecord persists the given VersionRecord to disk.
+// Uses indented JSON for easier manual inspection of the versions file.
 func SaveVersionRecord(dir string, record VersionRecord) error {
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return err
 	}
-	data, err := json.Marshal(record)
+	data, err := json.MarshalIndent(record, "", "  ")
 	if err != nil {
 		return err
 	}
