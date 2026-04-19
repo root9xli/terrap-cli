@@ -30,7 +30,9 @@ func SaveVersionRecord(dir string, record VersionRecord) error {
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(VersionFilePath(dir), data, 0o644)
+	// Use 0o600 instead of 0o644 to restrict read access to owner only,
+	// since version files may live in sensitive project directories.
+	return os.WriteFile(VersionFilePath(dir), data, 0o600)
 }
 
 // LoadVersionRecord reads a VersionRecord from disk.
