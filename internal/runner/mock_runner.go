@@ -22,6 +22,7 @@ func NewMockRunner() *MockRunner {
 }
 
 // Run records the call and returns the configured stub output/error.
+// Note: error takes precedence over output if both are set for the same subcommand.
 func (m *MockRunner) Run(subcommand string, args ...string) (string, error) {
 	m.Calls = append(m.Calls, MockCall{Subcommand: subcommand, Args: args})
 	if err, ok := m.Errors[subcommand]; ok {
@@ -52,4 +53,9 @@ func (m *MockRunner) CallCount(subcommand string) int {
 		}
 	}
 	return count
+}
+
+// Reset clears all recorded calls, allowing the MockRunner to be reused across subtests.
+func (m *MockRunner) Reset() {
+	m.Calls = nil
 }
