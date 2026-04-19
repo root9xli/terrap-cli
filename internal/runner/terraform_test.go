@@ -46,6 +46,6 @@ func TestPlanInEmptyDir(t *testing.T) {
 
 	r := NewTerraformRunner(dir)
 	_, err = r.Plan()
-	// Expect an error because no .tf files exist
-	assert.Error(t, err)
+	// Expect an error because no .tf files exist and no init has been run
+	assert.Error(t, err, "plan in an uninitialised empty dir should fail")
 }
