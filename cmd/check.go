@@ -13,6 +13,7 @@ import (
 var checkCmd = &cobra.Command{
 	Use:   "check",
 	Short: "Check for provider version drift against last recorded state",
+	Long:  "Compares current provider versions against the last recorded state and reports any drift. New providers are marked with '+', changed versions with '~'.",
 	RunE:  runCheck,
 }
 
@@ -47,7 +48,8 @@ func runCheck(cmd *cobra.Command, args []string) error {
 		return nil
 	}
 
-	fmt.Printf("⚠ Provider version drift detected (workspace: %s):\n", ws)
+	// Print a summary count before listing individual diffs
+	fmt.Printf("⚠ Provider version drift detected (workspace: %s): %d change(s)\n", ws, len(diffs))
 	for _, d := range diffs {
 		if d.OldVersion == "" {
 			fmt.Printf("  + %s: new provider @ %s\n", d.Provider, d.NewVersion)
