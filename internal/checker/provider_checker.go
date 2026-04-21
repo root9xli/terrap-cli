@@ -25,6 +25,10 @@ func GetProviderVersions(r runner.Runner, workDir string) ([]ProviderVersion, er
 
 // parseProviderOutput parses the raw output of `terraform providers`.
 // It returns a slice of ProviderVersion extracted from lines starting with "provider".
+//
+// Note: fmt.Sscanf with "%s" stops at whitespace, so the closing "]" ends up
+// attached to the name token rather than being consumed separately. We strip it
+// with trimSuffix below. This is a known quirk of the parsing approach.
 func parseProviderOutput(output string) []ProviderVersion {
 	var providers []ProviderVersion
 	lines := splitLines(output)
