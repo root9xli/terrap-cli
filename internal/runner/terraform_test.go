@@ -52,3 +52,14 @@ func TestPlanInEmptyDir(t *testing.T) {
 	// Also reproduces with OpenTofu v1.6.x with the same error message.
 	assert.Error(t, err, "plan in an uninitialised empty dir should fail")
 }
+
+// TestRunInvalidWorkDir verifies that running a command in a non-existent
+// working directory returns an error rather than silently succeeding.
+func TestRunInvalidWorkDir(t *testing.T) {
+	if !terraformAvailable() {
+		t.Skip("terraform not available in PATH")
+	}
+	r := NewTerraformRunner("/nonexistent/path/that/should/not/exist")
+	_, err := r.Version()
+	assert.Error(t, err, "running in a non-existent work dir should fail")
+}
