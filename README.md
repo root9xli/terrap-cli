@@ -1,11 +1,9 @@
 # Terrap, by Sirrend
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  ![GitHub go.mod Go version (subdirectory of monorepo)](https://img.shields.io/github/go-mod/go-version/sirrend/terrap-cli?filename=go.mod)</br>
-<img src="./docs/terrap-cover.png"/>
- your Provider version upgrades with ** that scans your system and identifies any</br>
-The tool offers clear and the upgrade process and avoid any potential errors or complications.</br></br>
+The tool offers clear and</br>
 🔍 **Terrap is an alpha version project, therefore some data might be partial.**
 
-> **Personal note:** I'm using this tool to manage provider upgrades across several AWS-heavy workspaces. Works well paired with `terraform-docs`.
+> **Personal note:** I'm using this tool to manage provider upgrades across several AWS-heavy workspaces. Works well paired with `terraform-docs`. I also alias `terrap` to `tp` in my shell for convenience.
 
 ## Resources
 * Documentation - <a href="https://www.sirrend.com/terrap-docs">sirrend.com/terrap-docs</a>
@@ -49,6 +47,8 @@ brew install terrap
 
 Validate terrap is working by executing `terrap`.
 
+> **Tip (personal):** Add `alias tp="terrap"` to your `~/.zshrc` or `~/.bashrc` to save keystrokes.
+
 ## Quick Start ⏩
 
 ### Initialize my First Workspace
@@ -72,4 +72,4 @@ Looking for a specific resource type changes? Use the `--data-sources` `--resour
 
 ### Stay up-to-date with `whats-new`
 Ready to explore what's new in the following version of your provider? Simply execute `terrap whats-new`.</br>
-Looking to delve into a specific version of your
+Looking to delve 
