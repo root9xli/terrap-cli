@@ -1,9 +1,7 @@
 # Terrap, by Sirrend
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)  ![GitHub go.mod Go version (subdirectory of monorepo)](https://img.shields.io/github/go-mod/go-version/sirrend/terrap-cli?filename=go.mod)</br>
 The tool offers clear and</br>
-🔍 **Terrap is an alpha version project, therefore some data might be partial.**
-
-> **Personal note:** I'm using this tool to manage provider upgrades across several AWS-heavy workspaces. Works well paired with `terraform-docs`. I also alias `terrap` to `tp` in my shell for convenience.
+🔍 **Terrap is an alpha> **Personal note:** I'm using this tool to manage provider upgrades across several AWS-heavy workspaces. Works well paired with.
 
 ## Resources
 * Documentation - <a href="https://www.sirrend.com/terrap-docs">sirrend.com/terrap-docs</a>
@@ -69,6 +67,8 @@ https://user-images.githubusercontent.com/47568615/236044850-3473952a-4169-4d63-
 ### Scan for changes with `scan`
 Scan your infrastructure for changes in the following provider version for a safe and easy upgrade!</br>
 Looking for a specific resource type changes? Use the `--data-sources` `--resources` and `--provider` flags.
+
+> **Personal note:** I primarily use `terrap scan --resources` scoped to the `aws` provider. Filtering by resource type significantly cuts down noise when working in large workspaces with multiple providers.
 
 ### Stay up-to-date with `whats-new`
 Ready to explore what's new in the following version of your provider? Simply execute `terrap whats-new`.</br>
