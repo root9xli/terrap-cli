@@ -50,8 +50,30 @@ func TestDeleteVersionRecord(t *testing.T) {
 }
 
 func TestDeleteVersionRecordMissingIsNoop(t *testing.T) {
-	// Deleting a non-existent record should be a no-op, not an error
+	// Deleting a non-existent record should be a no-op, not an error.
+	// This is important for idempotent cleanup flows (e.g. teardown scripts).
 	dir := t.TempDir()
 	err := DeleteVersionRecord(dir)
 	assert.NoError(t, err)
+}
+
+func TestSaveVersionRecordMultipleProviders(t *testing.T) {
+	// Verify that saving a record with several providers round-trips correctly.
+	dir := t.TempDir()
+	record := VersionRecord{
+		Workspace: "staging",
+		Versions: map[string]string{
+			"aws":       "5.0.0",
+			"google":    "4.1.0",
+			"azurerm":   "3.2.1",
+			"kubernetes": "2.18.0",
+		},
+	}
+
+	require.NoError(t, SaveVersionRecord(dir, record))
+
+	loaded, err := LoadVersionRecord(dir)
+	require.NoError(t, err)
+	assert.Equal(t, record.Workspace, loaded.Workspace)
+	assert.Equal(t, record.Versions, loaded.Versions)
 }
