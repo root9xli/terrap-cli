@@ -24,6 +24,9 @@ func TestSaveAndLoadWorkspace(t *testing.T) {
 	assert.Equal(t, data.Directory, loaded.Directory)
 }
 
+// TestLoadWorkspaceMissingReturnsDefault verifies that loading a workspace from
+// a directory with no saved state returns sensible defaults (name="default",
+// directory set to the given dir) rather than an error.
 func TestLoadWorkspaceMissingReturnsDefault(t *testing.T) {
 	dir := t.TempDir()
 
