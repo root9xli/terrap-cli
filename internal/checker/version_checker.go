@@ -19,6 +19,9 @@ type Diff struct {
 // Returns a list of diffs for providers whose versions have changed.
 // Note: providers present in the record but missing from current are not flagged
 // as diffs — only additions and version changes are reported.
+//
+// TODO(personal): consider adding a flag to also report removals (providers in
+// record but absent from current), which could indicate accidental provider drops.
 func CheckVersions(dir string, current map[string]string) ([]Diff, error) {
 	record, err := state.LoadVersionRecord(dir)
 	if err != nil {
