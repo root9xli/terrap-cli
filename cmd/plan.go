@@ -30,6 +30,10 @@ func runPlan(cmd *cobra.Command, args []string) error {
 	}
 
 	planArgs := []string{"plan"}
+
+	// Always enable compact-warnings to reduce noise in plan output
+	planArgs = append(planArgs, "-compact-warnings")
+
 	if varFile, _ := cmd.Flags().GetString("var-file"); varFile != "" {
 		planArgs = append(planArgs, "-var-file="+varFile)
 	}
