@@ -2,6 +2,7 @@ package checker
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/sirrend/terrap-cli/internal/runner"
 	"github.com/sirrend/terrap-cli/internal/state"
@@ -26,9 +27,7 @@ func GetProviderVersions(r runner.Runner, workDir string) ([]ProviderVersion, er
 // parseProviderOutput parses the raw output of `terraform providers`.
 // It returns a slice of ProviderVersion extracted from lines starting with "provider".
 //
-// Note: fmt.Sscanf with "%s" stops at whitespace, so the closing "]" ends up
-// attached to the name token rather than being consumed separately. We strip it
-// with trimSuffix below. This is a known quirk of the parsing approach.
+// Using strings.TrimSuffix instead of the custom trimSuffix helper for clarity.
 func parseProviderOutput(output string) []ProviderVersion {
 	var providers []ProviderVersion
 	lines := splitLines(output)
@@ -36,8 +35,8 @@ func parseProviderOutput(output string) []ProviderVersion {
 		var name, version string
 		// Expected format: provider[registry.terraform.io/hashicorp/aws] 4.0.0
 		if n, _ := fmt.Sscanf(line, "provider[%s %s", &name, &version); n == 2 {
-			// strip trailing ]
-			name = trimSuffix(name, "]")
+			// strip trailing ] using stdlib strings package
+			name = strings.TrimSuffix(name, "]")
 			providers = append(providers, ProviderVersion{Name: name, Version: version})
 		}
 	}
@@ -73,11 +72,4 @@ func splitLines(s string) []string {
 		lines = append(lines, s[start:])
 	}
 	return lines
-}
-
-func trimSuffix(s, suffix string) string {
-	if len(s) >= len(suffix) && s[len(s)-len(suffix):] == suffix {
-		return s[:len(s)-len(suffix)]
-	}
-	return s
 }
