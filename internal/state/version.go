@@ -37,6 +37,8 @@ func SaveVersionRecord(dir string, record VersionRecord) error {
 
 // LoadVersionRecord reads a VersionRecord from disk.
 // Returns an empty record if the file does not exist.
+// Note: after unmarshal we ensure both maps are non-nil so callers can
+// safely write to them without a nil-map panic.
 func LoadVersionRecord(dir string) (VersionRecord, error) {
 	data, err := os.ReadFile(VersionFilePath(dir))
 	if err != nil {
@@ -62,6 +64,7 @@ func LoadVersionRecord(dir string) (VersionRecord, error) {
 }
 
 // DeleteVersionRecord removes the version record file if it exists.
+// Silently succeeds when the file is already absent.
 func DeleteVersionRecord(dir string) error {
 	err := os.Remove(VersionFilePath(dir))
 	if errors.Is(err, os.ErrNotExist) {
