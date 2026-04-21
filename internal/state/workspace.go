@@ -21,13 +21,15 @@ func WorkspaceFilePath(dir string) string {
 }
 
 // SaveWorkspace persists the workspace data to disk.
+// Uses 0600 permissions instead of 0644 to restrict read access to the owner only,
+// since the workspace file may contain sensitive path information.
 func SaveWorkspace(dir string, data WorkspaceData) error {
 	path := WorkspaceFilePath(dir)
 	b, err := json.MarshalIndent(data, "", "  ")
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(path, b, 0644)
+	return os.WriteFile(path, b, 0600)
 }
 
 // LoadWorkspace reads workspace data from disk.
