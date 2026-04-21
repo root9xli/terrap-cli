@@ -44,8 +44,11 @@ func (r *TerraformRunner) Init(extraArgs ...string) (string, error) {
 }
 
 // Plan runs terraform plan and returns combined output.
+// -detailed-exitcode is added by default so callers can distinguish
+// "no changes" (exit 0) from "changes present" (exit 2) vs real errors.
 func (r *TerraformRunner) Plan(extraArgs ...string) (string, error) {
-	return r.Run("plan", extraArgs...)
+	args := append([]string{"-detailed-exitcode"}, extraArgs...)
+	return r.Run("plan", args...)
 }
 
 // Destroy runs terraform destroy with auto-approve.
